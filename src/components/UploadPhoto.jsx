@@ -1,6 +1,7 @@
 // src/components/UploadPhoto.jsx
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
+import { compressImage } from '../utils/compressImage';
 
 const UploadPhoto = ({ onUploadSuccess }) => {
   const [file, setFile] = useState(null);
@@ -14,22 +15,24 @@ const UploadPhoto = ({ onUploadSuccess }) => {
     setUploading(true);
 
     try {
-      // 1. Subir imagen al Storage
-      const fileExt = file.name.split('.').pop();
-      const fileName = `gallery/${Date.now()}.${fileExt}`;
+      // --- 2. NUEVO: Comprimir la imagen ---
+      const compressedFile = await compressImage(file);
+      
+      // --- 3. NUEVO: Asegurar extensión .webp ---
+      const fileName = `gallery/${Date.now()}.webp`; // Forzamos nombre .webp
       
       const { error: uploadError } = await supabase.storage
         .from('deku-content')
-        .upload(fileName, file);
+        .upload(fileName, compressedFile); // Subimos el archivo comprimido
 
       if (uploadError) throw uploadError;
 
-      // 2. Obtener URL pública
+      // Obtener URL
       const { data } = supabase.storage
         .from('deku-content')
         .getPublicUrl(fileName);
 
-      // 3. Guardar en la tabla 'gallery'
+      // Guardar en Base de Datos
       const { error: dbError } = await supabase
         .from('gallery')
         .insert([
@@ -42,11 +45,10 @@ const UploadPhoto = ({ onUploadSuccess }) => {
 
       if (dbError) throw dbError;
 
-      // Limpiar formulario y avisar que terminó
       setFile(null);
       setCaption('');
-      alert('¡Foto subida!');
-      if (onUploadSuccess) onUploadSuccess(); // Para recargar la galería automáticamente
+      alert('¡Foto optimizada y subida!');
+      if (onUploadSuccess) onUploadSuccess();
 
     } catch (error) {
       console.error('Error:', error);
