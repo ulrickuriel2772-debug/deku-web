@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { supabase } from './supabaseClient'; // Importar supabase
 
 // Páginas y Componentes
-import Intro from './components/intro';
+import Intro from './components/Intro';
 import PhotoGallery from './components/PhotoGallery';
 import Admin from './pages/Admin';
 import Login from './pages/Login'; // <--- Importar Login
