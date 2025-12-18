@@ -27,7 +27,7 @@ const Intro = () => {
                 <p className="font-bold uppercase text-xs text-gray-500 tracking-wider">
                   Cumpleaños
                 </p>
-                <p className="text-lg">15 de Julio, 2024</p>
+                <p className="text-lg">14 de Julio, 2024</p>
               </div>
             </div>
 
@@ -94,7 +94,7 @@ const Intro = () => {
               Premios Favoritos
             </h3>
             <ul className="space-y-2 text-gray-700">
-              <li>• Bocaditos de Pollo</li>
+              <li>• Pedacitos de Pollito</li>
               <li>• Churus del sabor que sea</li>
               <li>• Pedacitos de Salmón hidrolizado</li>
             </ul>
@@ -107,7 +107,7 @@ const Intro = () => {
             <ul className="space-y-2 text-gray-700">
               <li>• Perseguir el láser</li>
               <li>• Dormir con mi mamá</li>
-              <li>• Ver videos pájaros(ipad kid)</li>
+              <li>• Ver videos de aves(ipad kid)</li>
             </ul>
           </div>
 
