@@ -4,6 +4,7 @@ import UploadPhoto from '../components/UploadPhoto';
 import CreatePost from '../components/CreatePost';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient'; // <--- Importar Supabase
+import ContentManager from '../components/ContentManager';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -45,6 +46,13 @@ const Admin = () => {
           <UploadPhoto />
           <CreatePost />
 
+        </div>
+
+        <div className="border-t border-gray-700 pt-10">
+          <h2 className="text-2xl font-bold text-white mb-2 text-center">Gestionar Contenido Existente</h2>
+          <p className="text-gray-400 text-center text-sm mb-6">Aquí puedes eliminar fotos o entradas antiguas</p>
+          
+          <ContentManager />
         </div>
         
       </div>
