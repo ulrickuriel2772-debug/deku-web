@@ -104,7 +104,7 @@ const Intro = () => {
         </div>
 
         {/* --- BOTÓN MIAU-FI --- */}
-      <div className="mt-8">
+      <div className="mt-8 flex justify-center">
         <button 
           onClick={handleCopyWifi}
           className={`
