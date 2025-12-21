@@ -2,6 +2,23 @@
 import React from "react";
 
 const Intro = () => {
+
+  // Estado para saber si ya se copió la contraseña
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyWifi = () => {
+    // 1. Copiar al portapapeles
+    navigator.clipboard.writeText("WifiPurrFavor");
+    
+    // 2. Cambiar el estado para mostrar feedback visual
+    setCopied(true);
+
+    // 3. Volver al estado normal después de 2 segundos
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   return (
     // SECCIÓN PRINCIPAL: Ocupa todo el ancho y alto (min-h-screen), centra el contenido
     <section className="min-h-screen w-full bg-[#f8f5f0] text-[#1a1a1a] font-serif flex items-center justify-center p-4 md:p-8">
@@ -85,6 +102,36 @@ const Intro = () => {
             “¡Llenas nuestros días de amor, risas y pequeños maullidos!”
           </p>
         </div>
+
+        {/* --- BOTÓN MIAU-FI --- */}
+      <div className="mt-8">
+        <button 
+          onClick={handleCopyWifi}
+          className={`
+            flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-md transition-all transform hover:scale-105 active:scale-95
+            ${copied 
+              ? 'bg-green-500 text-white cursor-default' 
+              : 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'}
+          `}
+        >
+          {copied ? (
+            <>
+              ✅ ¡Contraseña Copiada!
+            </>
+          ) : (
+            <>
+              📶 Deku te comparte el MiauFi
+            </>
+          )}
+        </button>
+        
+        {/* Texto pequeño de ayuda (opcional, por si no saben qué pasó) */}
+        {copied && (
+          <p className="text-xs text-green-600 mt-2 animate-bounce">
+            Clave: "WifiPurrFavor" lista para pegar
+          </p>
+        )}
+      </div>
 
         {/* SECCIÓN DE FAVORITOS (3 columnas en PC, 1 en móvil) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 text-center md:text-left">
