@@ -1,5 +1,5 @@
 // src/components/Intro.jsx
-import React from "react";
+import React, { useState } from 'react';
 
 const Intro = () => {
 
